@@ -3,7 +3,6 @@
 import arcpy
 
 # variables
-# Service Definition name must be the same of the current service
 folder = r"C:\jescudero\Esri\AM"
 aprx_path = r"{0}\aprx\data_grid.aprx".format(folder)
 sdd_path = r"{0}\aprx\Grilla.sddraft".format(folder)
