@@ -10,7 +10,7 @@ usage_id = "c989c99c34a54915bb1ded804725e773"
 gis = GIS(agol_url, agol_user, agol_password)
 
 # Search content
-mycontent = gis.content.search(query="owner:armando.castro", item_type="Feature service", max_items=10)
+mycontent = gis.content.search(query="owner:armando.castro", item_type="Dashboard", max_items=20)
 adds = []
 for item in mycontent:
     try:
