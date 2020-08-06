@@ -6,12 +6,12 @@ from arcgis.geometry import Point
 from arcgis.geometry import SpatialReference
 from arcgis.geometry import filters
 
-# Connect to agol
-gis = GIS(agol_url, agol_user, agol_password)
-
 # Variables
 erradication_id = "9bc352654401432ca046825fd35f8fc1"
 municipio_id = "43b88e5f2549404886f2b3725126d7c7"
+
+# Connect to agol
+gis = GIS(agol_url, agol_user, agol_password)
 
 # Read data
 erradicacion_item = gis.content.get(erradication_id)
@@ -46,7 +46,6 @@ for row in erradicacion_lyr.query(where="nombremunicipio = '-'"):
     update = {"attributes": {"objectid": oid, "NombreMunicipio": nombre_mpio, "NombreDepartamento": nombre_depto, "coddane": coddane}}
 
     updates.append(update)
-
 
 # Update incidentes
 erradicacion_lyr.edit_features(updates=updates)
