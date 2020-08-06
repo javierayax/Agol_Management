@@ -2,6 +2,9 @@
 # imports
 from initial_config import *
 import pandas as pd
+from urllib import parse
+import requests
+import json
 
 # variables
 csv = r"C:\jescudero\Esri\AM\data\erradicacion_06_08.csv"
@@ -10,12 +13,6 @@ url = "https://services2.arcgis.com/0K7cILuuyNUzfzjA/arcgis/rest/services/Erradi
 # Read data
 names = ["nombredepartamento", "nombremunicipio", 'hectareas', 'grupoarmado', "latitud", "longitud"]
 df = pd.read_csv(csv, sep=",", usecols=[13, 14, 21, 31, 43, 44], names=names, skiprows=1)
-
-# Method two: With REST (Without ArcGIS Python API)
-# Imports
-from urllib import parse
-import requests
-import json
 
 # Authenticate
 values = {'username': agol_user, 'password': agol_password, 'referer': 'https://www.arcgis.com', 'f': 'json'}
