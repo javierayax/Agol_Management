@@ -1,5 +1,4 @@
 # Truncate layer
-
 # imports
 from arcgis.gis import GIS
 from initial_config import *

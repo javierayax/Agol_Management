@@ -30,46 +30,4 @@ result = erradicacion_item.layers[0].edit_features(adds=fs)
 
 print(result)
 
-
-# Method two: With REST (Without ArcGIS Python API)
-# Imports
-from urllib import parse
-import requests
-import json
-
-# Authenticate
-values = {'username': agol_user, 'password': agol_password, 'referer': 'https://www.arcgis.com', 'f': 'json'}
-params = parse.urlencode(values).encode('ascii')
-token = None
-with requests.post("https://arcgis.com/sharing/rest/generateToken", params=params,  verify=False) as response:
-    if response.status_code == 200:
-        result = json.loads(response.content)
-        if 'token' in result:
-            token = result['token']
-print(token)
-
-# Prepare data
-adds = []
-for i, row in df.iterrows():
-    depto = row["nombredepartamento"]
-    mpio = row["nombremunicipio"]
-    x = row["longitud"]
-    y = row["latitud"]
-    atts = {'nombredepartamento': depto, 'nombremunicipio': mpio}
-    geom = {'x': x, 'y': y}
-    newFeature = {"attributes": atts, "geometry": geom}
-    adds.append(newFeature)
-
-# Append data
-url = "https://services2.arcgis.com/0K7cILuuyNUzfzjA/arcgis/rest/services/ErradicacionCoca/FeatureServer/0/addFeatures"
-data = {"features": json.dumps(adds)}
-params = {"f": "json", "token": token}
-with requests.post(url, data=data, params=params, verify=False) as response:
-    if response.status_code == 200:
-        result = json.loads(response.content)
-        print(result)
-
 # End
-
-
-
